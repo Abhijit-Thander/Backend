@@ -1,19 +1,20 @@
 import express from "express";
-import dotenv from "dotenv";
 import fs from "fs/promises";
+import { PORT } from "./src/config/serverConfig.js";
 
-const text = await fs.readFile("./Data.json", "utf-8");
+const text = await fs.readFile("./src/utils/Data.json", "utf-8");
 let users = JSON.parse(text);
-dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT;
 
 //middleware
+app.set("view engine", "ejs");
+app.set("views", "./src/views");
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.get("/api/users", (req, res) => res.json(users));
+app.get("/api/users", (req, res) => res.render("Home", { users }));
 
 app.get("/api/users/:id", async (req, res) => {
   const id = Number(req.params.id);
@@ -42,6 +43,11 @@ app.delete("/api/users/:id", async (req, res) => {
     }
     res.json({ message: "Successfully Deleted" });
   });
+});
+
+// Defaut route
+app.use((req, res) => {
+  return res.status(404).json({ message: "page not found" });
 });
 
 app.listen(PORT, () => console.log(`Server is listening on ${PORT}`));
