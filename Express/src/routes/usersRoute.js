@@ -6,7 +6,7 @@ const text = await fs.readFile("./src/utils/Data.json", "utf-8");
 const users = JSON.parse(text);
 
 router.get("/", (req, res) => {
-  res.json({ message: "Show All Users" });
+  res.json({ users });
 });
 
 router.get("/:id", async (req, res) => {

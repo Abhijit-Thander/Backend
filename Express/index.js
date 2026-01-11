@@ -19,9 +19,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/users", usersRouter);
 app.use("/api", apiRouter);
 
-
 app.get("/", (req, res) => {
-  res.json("Home Page", { users });
+  res.send("<h1>Home Page</h1>");
 });
 
 // Defaut route
