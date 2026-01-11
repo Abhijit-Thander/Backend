@@ -1,7 +1,7 @@
 import express from "express";
 import fs from "fs/promises";
 import { PORT } from "./src/config/serverConfig.js";
-import usersRouter from "./src/routes/usersRoute.js";
+import usersRouter from "./src/routes/v2/usersRoute.js";
 import apiRouter from "./src/routes/apiRoutes.js";
 
 const text = await fs.readFile("./src/utils/Data.json", "utf-8");
@@ -16,7 +16,7 @@ app.set("views", "./src/views");
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use("/users", usersRouter);
+// app.use("/users", usersRouter);
 app.use("/api", apiRouter);
 
 app.get("/", (req, res) => {
