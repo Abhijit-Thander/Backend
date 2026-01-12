@@ -1,36 +1,17 @@
 import express from "express";
-import fs from "fs/promises";
+import {
+  createUser,
+  deleteUserByid,
+  getUser,
+  getUserById,
+} from "../../controllers/userController.js";
 const router = express.Router();
 
-const text = await fs.readFile("./src/utils/Data.json", "utf-8");
-const users = JSON.parse(text);
+router.get("/", getUser);
 
-router.get("/", (req, res) => {
-  res.json({ users });
-});
+router.get("/:id", getUserById);
 
-router.get("/:id", async (req, res) => {
-  const id = Number(req.params.id);
-  const user = await users.find((user) => user.id == id);
-  res.send(user);
-});
+router.post("/", createUser);
 
-router.post("/", async (req, res) => {
-  const data = req.body;
-  users.push({ id: users.length + 1, ...data });
-  await fs.writeFile("./Data.json", JSON.stringify(users), (err, res) => {
-    res.json("Successfully Added");
-  });
-});
-
-router.delete("/users/:id", async (req, res) => {
-  const id = Number(req.params.id);
-  users = users.filter((user) => user.id !== id);
-  await fs.writeFile("./Data.json", JSON.stringify(users), (err) => {
-    if (err) {
-      return res.status(500).json({ message: "File write failed" });
-    }
-    res.json({ message: "Successfully Deleted" });
-  });
-});
+router.delete("/users/:id", deleteUserByid);
 export default router;
