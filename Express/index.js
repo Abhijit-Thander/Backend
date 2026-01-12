@@ -1,10 +1,6 @@
 import express from "express";
-import fs from "fs/promises";
 import { PORT } from "./src/config/serverConfig.js";
 import apiRouter from "./src/routes/apiRoutes.js";
-
-const text = await fs.readFile("./src/utils/Data.json", "utf-8");
-let users = JSON.parse(text);
 
 const app = express();
 
@@ -13,7 +9,7 @@ app.set("view engine", "ejs");
 app.set("views", "./src/views");
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 
 app.use("/api", apiRouter);
 

@@ -1,32 +1,18 @@
-import fs from "fs/promises";
-const text = await fs.readFile("./src/utils/Data.json", "utf-8");
-const users = JSON.parse(text);
-
 export const getUser = (req, res) => {
-  res.json({ users });
+  res.json({ messsage: "Show all Users" });
 };
 
 export const getUserById = async (req, res) => {
   const id = Number(req.params.id);
-  const user = await users.find((user) => user.id == id);
-  res.send(user);
+  res.status(200).json({ message: "show user by id", id: id });
 };
 
 export const createUser = async (req, res) => {
   const data = req.body;
-  users.push({ id: users.length + 1, ...data });
-  await fs.writeFile("./Data.json", JSON.stringify(users), (err, res) => {
-    res.json("Successfully Added");
-  });
+  res.json({ message: "User create Successfull", data });
 };
 
 export const deleteUserByid = async (req, res) => {
   const id = Number(req.params.id);
-  users = users.filter((user) => user.id !== id);
-  await fs.writeFile("./Data.json", JSON.stringify(users), (err) => {
-    if (err) {
-      return res.status(500).json({ message: "File write failed" });
-    }
-    res.json({ message: "Successfully Deleted" });
-  });
+  res.status(200).json({ message: "Delete user by id", id: id });
 };
