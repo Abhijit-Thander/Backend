@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { maxLength, string, trim } from "zod";
+import { string } from "zod";
 
 const userSchema = new mongoose.Schema({
   name: {
