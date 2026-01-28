@@ -1,4 +1,4 @@
-import { success } from "zod";
+
 import { createTweet as createTweetservice } from "../services/user.services.js";
 
 export const getUser = (req, res) => {

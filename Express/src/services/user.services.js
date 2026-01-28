@@ -9,7 +9,7 @@ export const createTweet = async ({ name }) => {
     console.log(filter.clean(name));
     throw {
       message: "It contains bad word",
-      status: 400,
+      status: 400, 
     };
   }
 
