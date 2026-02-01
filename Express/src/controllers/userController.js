@@ -1,4 +1,3 @@
-
 import { createTweet as createTweetservice } from "../services/user.services.js";
 
 export const getUser = (req, res) => {
@@ -11,8 +10,12 @@ export const getUserById = async (req, res) => {
 };
 
 export const createUser = async (req, res) => {
+  console.log(req.file.path);
   try {
-    const response = await createTweetservice({ name: req.body.name });
+    const response = await createTweetservice({
+      name: req.body.name,
+      image: req.file?.path,
+    });
     return res.status(201).json({
       success: true,
       data: response,

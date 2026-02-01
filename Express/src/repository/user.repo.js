@@ -1,8 +1,8 @@
 import { User } from "../schema/user.schema.js";
 
-export const createUser = async ({ name }) => {
+export const createUser = async ({ name, image }) => {
   try {
-    const user = await User.create({ name });
+    const user = await User.create({ name, image });
     return user;
   } catch (error) {
     throw error;
