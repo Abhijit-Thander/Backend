@@ -1,7 +1,7 @@
 import { Filter } from "bad-words";
-import { createUser as CreateTweetRepo } from "../repository/user.repo.js";
+import { createUserRepo } from "../repository/user.repo.js";
 
-export const createTweet = async ({ name,image }) => {
+export const createUserService = async ({ name, image }) => {
   const filter = new Filter();
 
   if (filter.isProfane(name)) {
@@ -9,10 +9,10 @@ export const createTweet = async ({ name,image }) => {
     console.log(filter.clean(name));
     throw {
       message: "It contains bad word",
-      status: 400, 
+      status: 400,
     };
   }
 
-  const user = await CreateTweetRepo({ name,image });
+  const user = await createUserRepo({ name, image });
   return user;
 };

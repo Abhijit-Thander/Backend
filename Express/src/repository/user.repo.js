@@ -1,6 +1,6 @@
 import { User } from "../schema/user.schema.js";
 
-export const createUser = async ({ name, image }) => {
+export const createUserRepo = async ({ name, image }) => {
   try {
     const user = await User.create({ name, image });
     return user;
@@ -9,7 +9,7 @@ export const createUser = async ({ name, image }) => {
   }
 };
 
-export const getUser = async () => {
+export const getUserRepo = async () => {
   try {
     const users = await User.find();
     return users;
@@ -18,7 +18,7 @@ export const getUser = async () => {
   }
 };
 
-export const getUserById = async (id) => {
+export const getUserByIdRepo = async (id) => {
   try {
     const user = await User.findById(id);
     return user;
@@ -27,7 +27,7 @@ export const getUserById = async (id) => {
   }
 };
 
-export const deleteUser = async (id) => {
+export const deleteUserRepo = async (id) => {
   try {
     const user = await User.findByIdAndDelete(id);
     return user;

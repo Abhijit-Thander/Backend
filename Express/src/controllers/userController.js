@@ -1,18 +1,18 @@
-import { createTweet as createTweetservice } from "../services/user.services.js";
+import { createUserService } from "../services/user.services.js";
 
-export const getUser = (req, res) => {
+export const getUserController = (req, res) => {
   res.json({ messsage: "Show all Users" });
 };
 
-export const getUserById = async (req, res) => {
+export const getUserByIdController = async (req, res) => {
   const id = Number(req.params.id);
   res.status(200).json({ message: "show user by id", id: id });
 };
 
-export const createUser = async (req, res) => {
-  console.log(req.file.path);
+export const createUserController = async (req, res) => {
+  // console.log(req.file.path);
   try {
-    const response = await createTweetservice({
+    const response = await createUserService({
       name: req.body.name,
       image: req.file?.path,
     });
@@ -34,7 +34,7 @@ export const createUser = async (req, res) => {
   }
 };
 
-export const deleteUserByid = async (req, res) => {
+export const deleteUserByidController = async (req, res) => {
   const id = Number(req.params.id);
   res.status(200).json({ message: "Delete user by id", id: id });
 };
