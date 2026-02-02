@@ -1,18 +1,17 @@
 import { User } from "../schema/user.schema.js";
 
-export const createUserRepo = async ({ name, image }) => {
+export const getUsersRepo = async () => {
   try {
-    const user = await User.create({ name, image });
-    return user;
+    const users = await User.find();
+    return users;
   } catch (error) {
     throw error;
   }
 };
-
-export const getUserRepo = async () => {
+export const createUserRepo = async ({ name, image }) => {
   try {
-    const users = await User.find();
-    return users;
+    const user = await User.create({ name, image });
+    return user;
   } catch (error) {
     throw error;
   }
@@ -27,7 +26,7 @@ export const getUserByIdRepo = async (id) => {
   }
 };
 
-export const deleteUserRepo = async (id) => {
+export const deleteUserByIdRepo = async (id) => {
   try {
     const user = await User.findByIdAndDelete(id);
     return user;

@@ -22,5 +22,5 @@ router.post(
   createUserController,
 );
 
-router.delete("/users/:id", deleteUserByidController);
+router.delete("/:id", deleteUserByidController);
 export default router;
