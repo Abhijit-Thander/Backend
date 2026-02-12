@@ -50,7 +50,7 @@ export const createUserController = async (req, res) => {
     const response = await createUserService({
       name: req.body.name,
       image: req.file?.path,
-    });
+    }); 
     return res.status(201).json({
       success: true,
       data: response,
