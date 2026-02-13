@@ -9,4 +9,11 @@ export const signUpUserRepo = async ({ username, email, password }) => {
   }
 };
 
-export const signInUserRepo = () => {};
+export const signInUserRepo = async ({ username }) => {
+  try {
+    const Users = await UserInfo.findOne({ username }).select("+password");
+    return Users;
+  } catch (error) {
+    throw error;
+  }
+};
